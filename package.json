@@ -1,0 +1,28 @@
+{
+  "name": "team-c-pending-test-harness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kainos-academy-2026-eayl/team-c-pending-test-harness.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kainos-academy-2026-eayl/team-c-pending-test-harness/issues"
+  },
+  "homepage": "https://github.com/kainos-academy-2026-eayl/team-c-pending-test-harness#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6",
+    "dotenv": "^18.0.9"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}
