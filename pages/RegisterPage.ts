@@ -22,12 +22,12 @@ export default class RegisterPage {
         this.registerButton = page.getByTestId("register-button");
     }
 
-    public register(opts: { firstName: string, lastName: string, email: string, password: string; }) {
-        this.emailField.fill(opts.email);
-        this.firstNameField.fill(opts.firstName);
-        this.lastNameField.fill(opts.lastName);
-        this.passwordField.fill(opts.password);
-        this.confirmPasswordField.fill(opts.password);
-        this.registerButton.click();
+    public async register(opts: { firstName: string, lastName: string, email: string, password: string; }) {
+        await this.emailField.fill(opts.email);
+        await this.firstNameField.fill(opts.firstName);
+        await this.lastNameField.fill(opts.lastName);
+        await this.passwordField.fill(opts.password);
+        await this.confirmPasswordField.fill(opts.password);
+        await this.registerButton.click();
     }
 }
