@@ -21,5 +21,5 @@ test("After login the authenticated version of the main page is displayed", asyn
     });
 
     const productPage = await ProductPage.new(page);
-    await expect(productPage.profileButton).toBeVisible();
+    await expect(productPage.header.profileButton).toBeVisible();
 });

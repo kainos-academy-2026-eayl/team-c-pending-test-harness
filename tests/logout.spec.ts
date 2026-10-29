@@ -14,5 +14,5 @@ test("After logout the unauthenticated version of the main page is displayed", a
     await accountPage.logout();
 
     const productPage = await ProductPage.new(page);
-    await expect(productPage.profileButton).not.toBeVisible();
+    await expect(productPage.header.profileButton).not.toBeVisible();
 });

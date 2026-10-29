@@ -14,5 +14,5 @@ test("After registration the authenticated version of the main page is displayed
     });
 
     const productPage = await ProductPage.new(page);
-    await expect(productPage.profileButton).toBeVisible();
+    await expect(productPage.header.profileButton).toBeVisible();
 });
