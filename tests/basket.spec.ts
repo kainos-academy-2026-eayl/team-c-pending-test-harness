@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 import RegisterPage from "../pages/RegisterPage";
-import ProductPage from "../pages/ProductPage";
+import ProductsPage from "../pages/ProductsPage";
 import BasketPage from "../pages/basketPage";
 
 test("Add item to basket", async ({ page }) => {
@@ -13,7 +13,7 @@ test("Add item to basket", async ({ page }) => {
         lastName: "Doe"
     });
 
-    const productPage = await ProductPage.new(page);
+    const productPage = await ProductsPage.new(page);
 
     const name = await productPage.products[0].name();
     await productPage.products[0].addToBasket();
@@ -33,7 +33,7 @@ test("Basket quantity controls work", async ({ page }) => {
         lastName: "Doe"
     });
 
-    const productPage = await ProductPage.new(page);
+    const productPage = await ProductsPage.new(page);
 
     const name = await productPage.products[0].name();
     await productPage.products[0].addToBasket();
