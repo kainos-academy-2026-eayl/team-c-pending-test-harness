@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 import RegisterPage from "../pages/RegisterPage";
-import ProductPage from "../pages/ProductPage";
+import ProductsPage from "../pages/ProductsPage";
 
 test("After registration the authenticated version of the main page is displayed", async ({ page }) => {
     const email = `john.doe.${Date.now()}@example.com`;
@@ -13,6 +13,6 @@ test("After registration the authenticated version of the main page is displayed
         lastName: "Doe"
     });
 
-    const productPage = await ProductPage.new(page);
+    const productPage = await ProductsPage.new(page);
     await expect(productPage.header.profileButton).toBeVisible();
 });

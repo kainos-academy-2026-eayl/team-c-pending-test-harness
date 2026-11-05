@@ -11,6 +11,10 @@ export default class BasketPage {
 
     private constructor(private page: Page, public products: Product[]) { }
 
+    async hasProduct(name: string) {
+        const productNames = await Promise.all(this.products.map(product => product.name()));
+        return productNames.some(productName => productName?.trim() === name.trim());
+    }
 }
 
 class Product {

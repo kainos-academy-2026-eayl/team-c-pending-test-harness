@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 
 export default class RegisterPage {
     private firstNameField: Locator;
@@ -7,6 +8,7 @@ export default class RegisterPage {
     private passwordField: Locator;
     private confirmPasswordField: Locator;
     private registerButton: Locator;
+    private showPassword: Locator;
 
     static async new(page: Page) {
         await page.goto("/register");
@@ -20,8 +22,12 @@ export default class RegisterPage {
         this.passwordField = page.getByTestId("password");
         this.confirmPasswordField = page.getByTestId("confirm-password");
         this.registerButton = page.getByTestId("register-button");
+        this.showPassword = page.getByTestId("show-password");
     }
-
+    public async showPasswordField() {
+        await this.showPassword.click();
+        await expect(this.passwordField).toHaveAttribute("type", "text");
+    }
     public async register(opts: { firstName: string, lastName: string, email: string, password: string; }) {
         await this.emailField.fill(opts.email);
         await this.firstNameField.fill(opts.firstName);

@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 import LoginPage from "../pages/LoginPage";
-import ProductPage from "../pages/ProductPage";
+import ProductsPage from "../pages/ProductsPage";
 import RegisterPage from "../pages/RegisterPage";
 
 test("After login the authenticated version of the main page is displayed", async ({ page }) => {
@@ -20,6 +20,6 @@ test("After login the authenticated version of the main page is displayed", asyn
         password: "password123"
     });
 
-    const productPage = await ProductPage.new(page);
+    const productPage = await ProductsPage.new(page);
     await expect(productPage.header.profileButton).toBeVisible();
 });
