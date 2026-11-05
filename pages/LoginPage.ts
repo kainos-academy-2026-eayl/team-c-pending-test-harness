@@ -1,5 +1,4 @@
 import { Locator, Page } from "@playwright/test";
-import { text } from "stream/iter";
 import { expect } from "@playwright/test";
 
 export default class LoginPage {

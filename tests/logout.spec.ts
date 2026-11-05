@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 import RegisterPage from "../pages/RegisterPage";
 import AccountPage from "../pages/AccountPage";
-import ProductPages from "../pages/ProductsPage";
+import ProductsPage from "../pages/ProductsPage";
 
 test("After logout the unauthenticated version of the main page is displayed", async ({ page }) => {
     const email = `john.doe.${Date.now()}@example.com`;
@@ -17,6 +17,6 @@ test("After logout the unauthenticated version of the main page is displayed", a
     const accountPage = await AccountPage.new(page);
     await accountPage.logout();
 
-    const productPage = await ProductPages.new(page);
+    const productPage = await ProductsPage.new(page);
     await expect(productPage.header.profileButton).not.toBeVisible();
 });

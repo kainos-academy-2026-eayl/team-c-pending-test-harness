@@ -15,7 +15,6 @@ export default class BasketPage {
         const productNames = await Promise.all(this.products.map(product => product.name()));
         return productNames.some(productName => productName?.trim() === name.trim());
     }
-
 }
 
 class Product {

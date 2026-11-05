@@ -1,5 +1,4 @@
 import { Locator, Page } from "@playwright/test";
-
 export default class ProductPage {
 
     static async from(page: Page) {
