@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 import RegisterPage from "../pages/RegisterPage";
 import ProductPage from "../pages/ProductPage";
-import BasketPage from "../pages/basketPage";
+import BasketPage from "../pages/BasketPage";
 
 test("Add item to basket", async ({ page }) => {
     const email = `john.doe.${Date.now()}@example.com`;
