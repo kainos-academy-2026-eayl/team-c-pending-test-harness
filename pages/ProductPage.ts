@@ -1,35 +1,40 @@
 import { Locator, Page } from "@playwright/test";
-import HeaderPage from "./Header";
 
 export default class ProductPage {
 
-    header: HeaderPage;
+    static async from(page: Page) {
+        const reviews = (await page.getByTestId("review").all()).map(review => new Review(review));
 
-    static async new(page: Page) {
-        await page.goto("/");
-
-        return new ProductPage(page, (await page.getByTestId("product").all()).map(product => new Product(product)));
+        return new ProductPage(page, reviews);
     }
 
-    private constructor(private page: Page, public products: Product[]) {
-        this.header = new HeaderPage(page);
+    private constructor(private page: Page, public reviews: Review[]) {
+    }
+
+    async addReview(stars: 1 | 2 | 3 | 4 | 5, message: string) {
+        await this.page.getByTestId("add-review-link-" + (stars - 1)).click();
+
+        await this.page.getByTestId("next-button").click();
+
+        await this.page.getByTestId("message").fill(message);
+
+        await this.page.getByTestId("post-button").click();
     }
 }
 
-class Product {
-    private nameLabel: Locator;
-    private addToBasketButton: Locator;
-
+class Review {
+    private reviewerNameLabel: Locator;
+    private reviewTextLabel: Locator;
     constructor(private section: Locator) {
-        this.nameLabel = section.getByTestId("product-name");
-        this.addToBasketButton = section.getByTestId("add-to-basket-button");
+        this.reviewerNameLabel = section.getByTestId("review-author");
+        this.reviewTextLabel = section.getByTestId("review-comment");
     }
 
-    async addToBasket() {
-        await this.addToBasketButton.click();
+    async getReviewerName() {
+        return (await this.reviewerNameLabel.textContent())?.trim();
     }
 
-    async name() {
-        return await this.nameLabel.textContent();
+    async getReviewText() {
+        return await this.reviewTextLabel.textContent();
     }
 }
