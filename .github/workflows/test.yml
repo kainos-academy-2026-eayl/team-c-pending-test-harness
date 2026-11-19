@@ -22,10 +22,21 @@ jobs:
                   node-version: 22
             - name: Install dependencies
               run: npm ci
-            - name: Clone frontend
-              run: git clone --depth=1 https://github.com/kainos-academy-2026-eayl/team-c-pending-frontend.git
-            - name: Clone backend
-              run: git clone --depth=1 https://github.com/kainos-academy-2026-eayl/team-c-pending-backend.git
+            - name: Clone matching frontend and backend branches
+              env:
+                  SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
+              run: |
+                  for repository in team-c-pending-frontend team-c-pending-backend; do
+                      url="https://github.com/kainos-academy-2026-eayl/$repository.git"
+                      matching_ref=$(git ls-remote --heads "$url" "refs/heads/$SOURCE_BRANCH")
+                      if [ -n "$matching_ref" ]; then
+                          echo "Cloning $repository branch: $SOURCE_BRANCH"
+                          git clone --depth=1 --branch "$SOURCE_BRANCH" "$url"
+                      else
+                          echo "No branch '$SOURCE_BRANCH' in $repository; using its default branch"
+                          git clone --depth=1 "$url"
+                      fi
+                  done
             - name: Configure application environments
               run: |
                   # Local development values only; never use these in production.
